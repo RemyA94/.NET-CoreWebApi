@@ -20,6 +20,24 @@ namespace FrontApiCore.Controllers
             return View(lista);
         }
 
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(Credenciales credenciales)
+        {
+
+            bool respuesta = await _servicioApi.Autenticar(credenciales);
+            if (respuesta)
+                return RedirectToAction("Index");
+            else
+                return RedirectToAction("Usurio no autorizado", "Login");
+
+            return View();
+        }
+
         //VA A CONTROLAR LAS FUNCIONES DE GUARDAR O EDITAR
         public async Task<IActionResult> Producto(int idProducto)
         {
@@ -72,6 +90,7 @@ namespace FrontApiCore.Controllers
             else
                 return NoContent();
         }
+
 
 
         public IActionResult Privacy()

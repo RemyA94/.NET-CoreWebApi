@@ -12,5 +12,6 @@ namespace FrontApiCore.Servicios
         Task<bool> Editar(Producto objeto);
 
         Task<bool> Eliminar(int idProducto);
+        Task<bool> Autenticar(Credenciales credenciales);
     }
 }

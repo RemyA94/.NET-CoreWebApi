@@ -24,27 +24,35 @@ namespace FrontApiCore.Servicios
             _baseUrl = builder.GetSection("ApiSettings:baseUrl").Value;
         }
 
-        public async Task Autenticar()
+        public async Task<bool> Autenticar(Credenciales credenciales)
         {
-
+            bool respuesta;
             var cliente = new HttpClient();
             cliente.BaseAddress = new Uri(_baseUrl);
 
-            var credenciales = new Usuario() { Correo = _usuario, Clave = _clave };
+            if (credenciales.Correo == _usuario && credenciales.Clave == _clave)
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(credenciales), Encoding.UTF8, "application/json");
+                var response = await cliente.PostAsync("api/Autenticacion/Validar", content);
+                var json_respuesta = await response.Content.ReadAsStringAsync();
 
-            var content = new StringContent(JsonConvert.SerializeObject(credenciales), Encoding.UTF8, "application/json");
-            var response = await cliente.PostAsync("api/Autenticacion/Validar", content);
-            var json_respuesta = await response.Content.ReadAsStringAsync();
+                var resultado = JsonConvert.DeserializeObject<ResultadoCredencial>(json_respuesta);
+                _token = resultado.Token;              
+            }
+            else
+            {
+                respuesta = false;
+            }
+            return respuesta = true;
 
-            var resultado = JsonConvert.DeserializeObject<ResultadoCredencial>(json_respuesta);
-            _token = resultado.Token;
         }
 
         public async Task<List<Producto>> Lista()
         {
             List<Producto> lista = new List<Producto>();
+            Credenciales credenciales = new Credenciales();
 
-            await Autenticar();
+            await Autenticar(credenciales);
 
 
             var cliente = new HttpClient();
@@ -66,8 +74,9 @@ namespace FrontApiCore.Servicios
         public async Task<Producto> Obtener(int idProducto)
         {
             Producto objeto = new Producto();
+            Credenciales credenciales = new Credenciales();
 
-            await Autenticar();
+            await Autenticar(credenciales);
 
 
             var cliente = new HttpClient();
@@ -89,8 +98,9 @@ namespace FrontApiCore.Servicios
         public async Task<bool> Guardar(Producto objeto)
         {
             bool respuesta = false;
+            Credenciales credenciales = new Credenciales();
 
-            await Autenticar();
+            await Autenticar(credenciales);
 
 
             var cliente = new HttpClient();
@@ -112,8 +122,9 @@ namespace FrontApiCore.Servicios
         public async Task<bool> Editar(Producto objeto)
         {
             bool respuesta = false;
+            Credenciales credenciales = new Credenciales();
 
-            await Autenticar();
+            await Autenticar(credenciales);
 
 
             var cliente = new HttpClient();
@@ -135,8 +146,9 @@ namespace FrontApiCore.Servicios
         public async Task<bool> Eliminar(int idProducto)
         {
             bool respuesta = false;
+            Credenciales credenciales = new Credenciales();
 
-            await Autenticar();
+            await Autenticar(credenciales);
 
 
             var cliente = new HttpClient();
