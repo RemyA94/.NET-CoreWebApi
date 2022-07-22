@@ -1,4 +1,4 @@
-﻿@model Producto
+﻿@model Product
 @{
     ViewData["Title"] = "Producto";
 
@@ -12,25 +12,25 @@
 
         <form asp-action="GuardarCambios" asp-controller="Home" method="post">
 
-            <input type="hidden" asp-for="IdProducto" />
+            <input type="hidden" asp-for="IdProduct" />
 
             <div class="mb-2">
                 <label class="form-label">Barcode</label>
-                <input type="text" class="form-control form-control-sm" asp-for="CodigoBarra" />
+                <input type="text" class="form-control form-control-sm" asp-for="Barcode" />
             </div>
             <div class="mb-2">
                 <label class="form-label">Name</label>
-                <input type="text" class="form-control form-control-sm" asp-for="Descripcion" />
+                <input type="text" class="form-control form-control-sm" asp-for="Name" />
             </div>
             <div class="mb-2">
                 <label class="form-label">Brand</label>
-                <input type="text" class="form-control form-control-sm" asp-for="Marca" />
+                <input type="text" class="form-control form-control-sm" asp-for="Brand" />
             </div>
 
 
             <div class="mb-2">
                 <label class="form-label">Category</label>
-                <select type="text" class="form-select form-select-sm" asp-for="Categoria">
+                <select type="text" class="form-select form-select-sm" asp-for="Category">
                     <option value="Technology">Technology</option>.
                     <option value="ElectroHome">ElectroHome</option>
                     <option value="Accessories">Accessories</option>
@@ -40,7 +40,7 @@
 
             <div class="mb-2">
                 <label class="form-label">Price</label>
-                <input type="text" class="form-control form-control-sm" asp-for="Precio" />
+                <input type="text" class="form-control form-control-sm" asp-for="Price" />
             </div>
 
             <button type="submit" class="btn btn-success btn-sm">Save changes</button>

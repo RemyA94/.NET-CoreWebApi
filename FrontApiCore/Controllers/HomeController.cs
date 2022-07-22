@@ -7,17 +7,17 @@ namespace FrontApiCore.Controllers
 {
     public class HomeController : Controller
     {
-        private IServicio_API _servicioApi;
+        private IService_API _servicioApi;
 
-        public HomeController(IServicio_API servicioApi)
+        public HomeController(IService_API servicioApi)
         {
             _servicioApi = servicioApi;
         }
 
         public async Task<IActionResult> Index()
         {
-            List<Producto> lista = await _servicioApi.Lista();
-            return View(lista);
+            List<Product> list = await _servicioApi.List();
+            return View(list);
         }
 
         public async Task<IActionResult> Login()
@@ -26,11 +26,11 @@ namespace FrontApiCore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(Credenciales credenciales)
+        public async Task<IActionResult> Login(Credential credenciales)
         {
 
-            bool respuesta = await _servicioApi.Autenticar(credenciales);
-            if (respuesta)
+            bool response = await _servicioApi.Authenticate(credenciales);
+            if (response)
                 return RedirectToAction("Index");
             else
                 return RedirectToAction("Unauthorized user", "Login");
@@ -38,40 +38,40 @@ namespace FrontApiCore.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Producto(int idProducto)
+        public async Task<IActionResult> Producto(int idProduct)
         {
 
-            Producto modelo_producto = new Producto();
+            Product producModel = new Product();
 
             ViewBag.Accion = "New product";
 
-            if (idProducto != 0)
+            if (idProduct != 0)
             {
 
                 ViewBag.Accion = "Edit product";
-                modelo_producto = await _servicioApi.Obtener(idProducto);
+                producModel = await _servicioApi.Get(idProduct);
             }
 
-            return View(modelo_producto);
+            return View(producModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> GuardarCambios(Producto ob_producto)
+        public async Task<IActionResult> SaveChanges(Product product)
         {
 
-            bool respuesta;
+            bool response;
 
-            if (ob_producto.IdProducto == 0)
+            if (product.IdProduct == 0)
             {
-                respuesta = await _servicioApi.Guardar(ob_producto);
+                response = await _servicioApi.Save(product);
             }
             else
             {
-                respuesta = await _servicioApi.Editar(ob_producto);
+                response = await _servicioApi.Edit(product);
             }
 
 
-            if (respuesta)
+            if (response)
                 return RedirectToAction("Index");
             else
                 return NoContent();
@@ -79,12 +79,12 @@ namespace FrontApiCore.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Eliminar(int idProducto)
+        public async Task<IActionResult> Delete(int idProduct)
         {
 
-            var respuesta = await _servicioApi.Eliminar(idProducto);
+            var response = await _servicioApi.Delete(idProduct);
 
-            if (respuesta)
+            if (response)
                 return RedirectToAction("Index");
             else
                 return NoContent();

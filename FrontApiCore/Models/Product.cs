@@ -3,25 +3,25 @@
 namespace FrontApiCore.Models
 {
     [JsonObject]
-    public class Producto
+    public class Product
     {
         [JsonProperty("idProducto")]
-        public int IdProducto { get; set; }
+        public int IdProduct { get; set; }
 
         [JsonProperty("codigoBarra")]
-        public string CodigoBarra { get; set; }
+        public string Barcode { get; set; }
 
         [JsonProperty("descripcion")]
-        public string Descripcion { get; set; }
+        public string Name { get; set; }
 
         [JsonProperty("marca")]
-        public string Marca { get; set; }
+        public string Brand { get; set; }
 
         [JsonProperty("categoria")]
-        public string Categoria { get; set; }
+        public string Category { get; set; }
 
         [JsonProperty("precio")]
-        public decimal Precio { get; set; }
+        public decimal Price { get; set; }
 
         //[JsonProperty("categoria")]
         //public virtual Categoria oCategoria { get; set; }

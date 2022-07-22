@@ -1,4 +1,4 @@
-﻿@model List<Producto>
+﻿@model List<Product>
 @{
     ViewData["Title"] = "Remy";
 }
@@ -32,11 +32,11 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.CodigoBarra</td>
-                        <td>@item.Descripcion</td>
-                        <td>@item.Marca</td>
-                        <td>@item.Categoria</td>
-                        <td>@item.Precio</td>
+                        <td>@item.Barcode</td>
+                        <td>@item.Name</td>
+                        <td>@item.Brand</td>
+                        <td>@item.Category</td>
+                        <td>@item.Price</td>
                         <td>
                             <a asp-action="Producto" asp-controller="Home" asp-route-idProducto="@item.IdProducto" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square" style="font-size: 1rem"></i></a>
                             <a asp-action="Eliminar" asp-controller="Home" asp-route-idProducto="@item.IdProducto" class="btn btn-danger btn-sm"><i class="bbi bi-trash3" style="font-size: 1rem"></i></a>
