@@ -33,23 +33,22 @@ namespace FrontApiCore.Controllers
             if (respuesta)
                 return RedirectToAction("Index");
             else
-                return RedirectToAction("Usurio no autorizado", "Login");
+                return RedirectToAction("Unauthorized user", "Login");
 
             return View();
         }
 
-        //VA A CONTROLAR LAS FUNCIONES DE GUARDAR O EDITAR
         public async Task<IActionResult> Producto(int idProducto)
         {
 
             Producto modelo_producto = new Producto();
 
-            ViewBag.Accion = "Nuevo Producto";
+            ViewBag.Accion = "New product";
 
             if (idProducto != 0)
             {
 
-                ViewBag.Accion = "Editar Producto";
+                ViewBag.Accion = "Edit product";
                 modelo_producto = await _servicioApi.Obtener(idProducto);
             }
 
@@ -89,13 +88,6 @@ namespace FrontApiCore.Controllers
                 return RedirectToAction("Index");
             else
                 return NoContent();
-        }
-
-
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

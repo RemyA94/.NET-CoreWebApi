@@ -1,7 +1,7 @@
 ﻿@model Producto
 @{
     ViewData["Title"] = "Producto";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <div class="card">
@@ -15,36 +15,36 @@
             <input type="hidden" asp-for="IdProducto" />
 
             <div class="mb-2">
-                <label class="form-label">Codigo barras</label>
+                <label class="form-label">Barcode</label>
                 <input type="text" class="form-control form-control-sm" asp-for="CodigoBarra" />
             </div>
             <div class="mb-2">
-                <label class="form-label">Nombre</label>
+                <label class="form-label">Name</label>
                 <input type="text" class="form-control form-control-sm" asp-for="Descripcion" />
             </div>
             <div class="mb-2">
-                <label class="form-label">Marca</label>
+                <label class="form-label">Brand</label>
                 <input type="text" class="form-control form-control-sm" asp-for="Marca" />
             </div>
 
 
             <div class="mb-2">
-                <label class="form-label">Categoria</label>
+                <label class="form-label">Category</label>
                 <select type="text" class="form-select form-select-sm" asp-for="Categoria">
-                    <option value="Tecnologia" >Tecnología</option>
-                    <option value="ElectroHogar">Electro Hogar</option>
-                    <option value="Accesorios">Accesorios</option>
-                    <option value="Muebles">Muebles</option>
+                    <option value="Technology">Technology</option>.
+                    <option value="ElectroHome">ElectroHome</option>
+                    <option value="Accessories">Accessories</option>
+                    <option value="Furniture">Furniture</option>
                 </select>
             </div>
 
             <div class="mb-2">
-                <label class="form-label">Precio</label>
+                <label class="form-label">Price</label>
                 <input type="text" class="form-control form-control-sm" asp-for="Precio" />
             </div>
 
-            <button type="submit" class="btn btn-success btn-sm">Guardar Cambios</button>
-            <a asp-action="Index" asp-controller="Home" class="btn btn-warning btn-sm">Volver a lista</a>
+            <button type="submit" class="btn btn-success btn-sm">Save changes</button>
+            <a asp-action="Index" asp-controller="Home" class="btn btn-warning btn-sm">Back to index</a>
         </form>
 
 
