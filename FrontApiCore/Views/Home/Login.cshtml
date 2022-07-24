@@ -3,6 +3,7 @@
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 <section class="">
     <!-- Jumbotron -->
@@ -36,14 +37,16 @@
 
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <input type="email" class="form-control" asp-for="Correo" />
-                                    <label class="form-label">User</label>
+                                    <input type="email" class="form-control" asp-for="Mail" />
+                                    <label class="form-label" asp-for="Mail">User</label>
+                                    <span asp-validation-for="Mail" class=”text-danger” style="color:red"></span>
                                 </div>
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
-                                    <input type="password" class="form-control" asp-for="Clave" />
-                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-control" asp-for="Key" />
+                                    <label class="form-label" asp-for="Key">Password</label>
+                                    <span asp-validation-for="Key" class=”text-danger” style="color:red"></span>
                                 </div>
 
                                 <div class="d-grid gap-2">
@@ -74,4 +77,9 @@
         </div>
     </div>
 </section>
+
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}
 

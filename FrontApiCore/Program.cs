@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 
 using FrontApiCore.Servicios;
 
@@ -6,6 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IService_API, Service_API>();
+
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(option =>
+    {
+        option.LoginPath = "/Home/Login";
+        option.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+        option.AccessDeniedPath = "/Home/Login";
+    });
 
 var app = builder.Build();
 
@@ -17,6 +28,8 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

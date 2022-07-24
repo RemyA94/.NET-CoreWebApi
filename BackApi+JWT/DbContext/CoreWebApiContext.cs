@@ -17,41 +17,42 @@ namespace BackApi_JWT
         {
         }
 
-        public virtual DbSet<Producto> Productos { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Producto>(entity =>
+            modelBuilder.Entity<Product>(entity =>
             {
-                entity.HasKey(e => e.IdProducto)
-                    .HasName("PK__Producto__0988921081B8A021");
+                entity.HasKey(e => e.IdProduct)
+                    .HasName("PK__Product__2E8946D4705FC4FB");
 
-                entity.ToTable("Producto");
+                entity.ToTable("Product");
 
-                entity.HasIndex(e => e.CodigoBarra, "UQ__Producto__F504A763CB088ECB")
+                entity.HasIndex(e => e.Barcode, "UQ__Product__177800D3251C0CB1")
                     .IsUnique();
 
-                entity.Property(e => e.Categoria)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CodigoBarra)
+                entity.Property(e => e.Barcode)
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Descripcion)
+                entity.Property(e => e.Brand)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Marca)
+                entity.Property(e => e.Category)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Precio).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
             });
 
             OnModelCreatingPartial(modelBuilder);

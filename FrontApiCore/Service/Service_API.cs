@@ -19,22 +19,22 @@ namespace FrontApiCore.Servicios
 
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
 
-            _user = builder.GetSection("ApiSettings:usuario").Value;
-            _pass = builder.GetSection("ApiSettings:clave").Value;
+            _user = builder.GetSection("ApiSettings:user").Value;
+            _pass = builder.GetSection("ApiSettings:pass").Value;
             _baseUrl = builder.GetSection("ApiSettings:baseUrl").Value;
         }
 
         public async Task<bool> Authenticate(Credential credential)
         {
-            bool resp;
+            bool resp = false;
 
-            var cliente = new HttpClient();
-            cliente.BaseAddress = new Uri(_baseUrl);
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(_baseUrl);
 
             if (credential.Mail == _user && credential.Key == _pass)
             {
                 var content = new StringContent(JsonConvert.SerializeObject(credential), Encoding.UTF8, "application/json");
-                var response = await cliente.PostAsync("api/Autenticacion/Validar", content);
+                var response = await client.PostAsync("api/authentication/validate", content);
                 var json_response = await response.Content.ReadAsStringAsync();
 
                 var result = JsonConvert.DeserializeObject<ApiToken>(json_response);
@@ -42,7 +42,7 @@ namespace FrontApiCore.Servicios
             }
             else
             {
-                resp = false;
+                return resp = false;
             }
             return resp = true;
 
@@ -59,7 +59,7 @@ namespace FrontApiCore.Servicios
             var client = new HttpClient();
             client.BaseAddress = new Uri(_baseUrl);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
-            var response = await client.GetAsync("api/Producto/Lista");
+            var response = await client.GetAsync("api/Product/List");
 
             if (response.IsSuccessStatusCode)
             {
@@ -80,10 +80,10 @@ namespace FrontApiCore.Servicios
             await Authenticate(credential);
 
 
-            var cliente = new HttpClient();
-            cliente.BaseAddress = new Uri(_baseUrl);
-            cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
-            var response = await cliente.GetAsync($"api/Producto/Obtener/{idProduct}");
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(_baseUrl);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+            var response = await client.GetAsync($"api/Product/Get/{idProduct}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -110,7 +110,7 @@ namespace FrontApiCore.Servicios
 
             var content = new StringContent(JsonConvert.SerializeObject(objet), Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("api/Producto/Guardar/", content);
+            var response = await client.PostAsync("api/Product/Save/", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -134,7 +134,7 @@ namespace FrontApiCore.Servicios
 
             var content = new StringContent(JsonConvert.SerializeObject(objet), Encoding.UTF8, "application/json");
 
-            var response = await client.PutAsync("api/Producto/Editar/", content);
+            var response = await client.PutAsync("api/Product/Edit/", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -157,7 +157,7 @@ namespace FrontApiCore.Servicios
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
 
 
-            var response = await client.DeleteAsync($"api/Producto/Eliminar/{idProduct}");
+            var response = await client.DeleteAsync($"api/Product/Delete/{idProduct}");
 
             if (response.IsSuccessStatusCode)
             {

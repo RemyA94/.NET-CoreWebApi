@@ -85,7 +85,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 //servicio configuracion de los cors
 //añadimos una politica como servicio en el builder que nos permite cualquier orige, cabecera y método que haga una solicitud a nuestra api
-var misReglarCors = "ReglasCors";
+var misReglarCors = "CorsRules";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: misReglarCors, builder =>

@@ -3,6 +3,7 @@
     ViewData["Title"] = "Producto";
 
 }
+<div asp-validation-summary="ModelOnly"></div>
 
 <div class="card">
     <div class="card-header">
@@ -10,46 +11,53 @@
     </div>
     <div class="card-body">
 
-        <form asp-action="GuardarCambios" asp-controller="Home" method="post">
+        <form asp-action="SaveChanges" asp-controller="Home" method="post">
 
             <input type="hidden" asp-for="IdProduct" />
 
             <div class="mb-2">
-                <label class="form-label">Barcode</label>
+                <label class="form-label" asp-for="Barcode">Barcode</label>
                 <input type="text" class="form-control form-control-sm" asp-for="Barcode" />
+                <span asp-validation-for="Barcode" class=”text-danger” style="color:red"></span>
             </div>
             <div class="mb-2">
-                <label class="form-label">Name</label>
+                <label class="form-label" asp-for="Name">Name</label>
                 <input type="text" class="form-control form-control-sm" asp-for="Name" />
+                <span asp-validation-for="Name" class=”text-danger” style="color:red"></span>
             </div>
             <div class="mb-2">
-                <label class="form-label">Brand</label>
+                <label class="form-label" asp-for="Brand">Brand</label>
                 <input type="text" class="form-control form-control-sm" asp-for="Brand" />
+                <span asp-validation-for="Brand" class=”text-danger” style="color:red"></span>
             </div>
 
 
             <div class="mb-2">
-                <label class="form-label">Category</label>
+                <label class="form-label" asp-for="Category">Category</label>
                 <select type="text" class="form-select form-select-sm" asp-for="Category">
                     <option value="Technology">Technology</option>.
                     <option value="ElectroHome">ElectroHome</option>
                     <option value="Accessories">Accessories</option>
                     <option value="Furniture">Furniture</option>
                 </select>
+                <span asp-validation-for="Category" class=”text-danger” style="color:red"></span>
             </div>
 
             <div class="mb-2">
-                <label class="form-label">Price</label>
+                <label class="form-label" asp-for="Price">Price</label>
                 <input type="text" class="form-control form-control-sm" asp-for="Price" />
+                <span asp-validation-for="Price" class=”text-danger” style="color:red"></span>
             </div>
 
             <button type="submit" class="btn btn-success btn-sm">Save changes</button>
             <a asp-action="Index" asp-controller="Home" class="btn btn-warning btn-sm">Back to index</a>
         </form>
 
-
-
-
     </div>
 
 </div>
+
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}
