@@ -14,10 +14,9 @@
         Product lists
     </div>
     <div class="card-body">
-
         <a asp-action="Product" asp-controller="Home" asp-route-idProduct="0" class="btn btn-success btn-lg">New product</a>
         <hr />
-        <table class="table" >
+        <table class="table" id="productTable">
             <thead>
                 <tr>
                     <th>Barcode</th>
@@ -31,21 +30,20 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                        <tr>
-                            <td>@item.Barcode</td>
-                            <td>@item.Name</td>
-                            <td>@item.Brand</td>
-                            <td>@item.Category</td>
-                            <td>@item.Price</td>
-                            <td>
-                                <a asp-action="Product" asp-controller="Home" asp-route-idProduct="@item.IdProduct" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square" style="font-size: 1rem"></i></a>
-                                <a asp-action="Delete" asp-controller="Home" asp-route-idProduct="@item.IdProduct" class="btn btn-danger btn-sm"><i class="bbi bi-trash3" style="font-size: 1rem"></i></a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>@item.Barcode</td>
+                        <td>@item.Name</td>
+                        <td>@item.Brand</td>
+                        <td>@item.Category</td>
+                        <td>@item.Price</td>
+                        <td>
+                            <a asp-action="Product" asp-controller="Home" asp-route-idProduct="@item.IdProduct" class="btn btn-edit btn-primary btn-sm"><i class="bi bi-pencil-square" style="font-size: 1rem"></i></a>
+                            <a asp-action="Delete" asp-controller="Home" asp-route-idProduct="@item.IdProduct" class="btn btn-delete btn-danger btn-sm"><i class="bbi bi-trash3" style="font-size: 1rem"></i></a>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
     </div>
 
 </div>
-
