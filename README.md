@@ -13,6 +13,9 @@
 ## The *BackApi_JWT* project is hosted at <https://somee.com>
 
 ## To access the api we type the address <http://corebackapi.somee.com/CoreApiBackend/Swagger/Index.html> for JWT authorization the credentials are user: *test@gmail.com* password: *123*
-  
 
+<p align="center">
+  <img align="center" src="https://user-images.githubusercontent.com/54869332/181034078-9b425fd2-a79e-4fa2-9292-195601294625.png" width="750" height="380">
+</p>
+  
 ### Project done by *Remy Acosta*.
